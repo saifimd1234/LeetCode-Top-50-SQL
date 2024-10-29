@@ -1,6 +1,4 @@
--- Active: 1729100198775@@127.0.0.1@3306@leetcode39
-show tables;
-
+-- USING SINGLE CTE AND WHERE CLAUSE(to define the window size and to filter the start date)
 WITH cte AS (
     SELECT
     visited_on,
@@ -14,8 +12,8 @@ SELECT
 FROM cte a
 LEFT JOIN cte b
 ON a.visited_on>=b.visited_on
-WHERE DATEDIFF(a.visited_on,b.visited_on) BETWEEN 0 AND 6
-AND a.visited_on >=(SELECT DATE_ADD(MIN(visited_on), INTERVAL 6 DAY) FROM Customer)
+WHERE DATEDIFF(a.visited_on,b.visited_on) BETWEEN 0 AND 6 -- define window size
+AND a.visited_on >=(SELECT DATE_ADD(MIN(visited_on), INTERVAL 6 DAY) FROM Customer) -- filters the start date to 7th day
 GROUP BY a.visited_on
 ORDER BY a.visited_on;
 
