@@ -32,6 +32,3 @@ GROUP BY
 ORDER BY 
     num DESC
 LIMIT 1;
-
-
-hhhhh
